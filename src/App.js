@@ -1,6 +1,7 @@
 
 import CartItem from "./CartItem";
 
+//Functional Component
 function App() {
   return (
     <div className="App">
