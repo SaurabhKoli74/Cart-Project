@@ -29,9 +29,11 @@ class CartItem extends React.Component {
 
     //Two ways to do that
 
-    //1st way
+    // 1st way
     // this.setState({
     //   qty: this.state.qty + 1
+    // },()=>{
+    //   console.log("setState() is Asynchronous to avoid it we add callback to setState()")
     // });
 
 
@@ -40,7 +42,12 @@ class CartItem extends React.Component {
       return {
         qty: preState.qty + 1
       }
+    },()=>{
+      console.log("setState() is Asynchronous to avoid it we add callback to setState()")
     });
+
+    
+
 
   }
 
