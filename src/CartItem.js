@@ -20,8 +20,28 @@ class CartItem extends React.Component {
     console.log(this.state);
   }
   */
-  increaseQuantity=()=> {
-    console.log(this.state);
+  increaseQuantity = () => {
+    // console.log(this.state);
+
+    // this.state.qty+=1; 
+    // above line will only change the react object state but it will not rerender so changes will not affect on JSX code
+
+
+    //Two ways to do that
+
+    //1st way
+    // this.setState({
+    //   qty: this.state.qty + 1
+    // });
+
+
+    //2nd way (when we need previous state then recommended to use this method)
+    this.setState((preState) => {
+      return {
+        qty: preState.qty + 1
+      }
+    });
+
   }
   render() {
     //js 
