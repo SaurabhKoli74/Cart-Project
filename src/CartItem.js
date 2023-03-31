@@ -3,6 +3,8 @@ import React from 'react'; //to write the react component
 //Class Component
 class CartItem extends React.Component {
   //create state
+  /*
+  //  Before using props created state in CartItem
   constructor() {
     super();
     this.state = {
@@ -17,6 +19,7 @@ class CartItem extends React.Component {
     //alternative bind method
     // this.increaseQuantity=this.increaseQuantity.bind(this);
   }
+  */
   /*
   increaseQuantity() {
     console.log(this.state);
@@ -98,15 +101,15 @@ class CartItem extends React.Component {
   }
   render() {
     //js 
-    const { price, title, qty, img } = this.state;
+    const { price, title, qty,img} = this.props.product;
     return (
       <div className="cart-item">
         <div className="left-block">
           {/* inline style */}
-          <img alt="Product Image" style={styles.image} src={this.state.img} />
+          <img alt="Product Image" style={styles.image} src={img} />
         </div>
         <div className="right-block">
-          <div style={{ fontSize: 25 }}>{title}</div>
+          <div style={{ fontSize: 25 }}>{title}</div> 
           <div style={{ color: '#777' }}>{price}</div>
           <div style={{ color: '#777' }}>{qty}</div>
           <div className="cart-item-actions">
