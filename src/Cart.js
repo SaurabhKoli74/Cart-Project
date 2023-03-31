@@ -35,8 +35,9 @@ class Cart extends React.Component {
 
 
     }
-    increaseQty=(product)=>{
-        // console.log(this.state.products)
+    increaseQty=(product)=>{ //used arrow fun to bind this with fun while passing it as props
+        // console.log(this.state)
+        console.log("Hey please inc the qty of "+product);
         const {products}=this.state;
         const  index = products.indexOf(product);
 
@@ -44,6 +45,28 @@ class Cart extends React.Component {
         this.setState({
             // products:products
             products
+        })
+    }
+    decreaseQty=(product)=>{
+        console.log("Hey please decr the qty of "+product);
+        const {products} = this.state;
+        const index = products.indexOf(product);
+        if(products[index].qty<=0){
+            return;
+        }
+        products[index].qty-=1;
+        this.setState({
+            products:products
+        })
+    }
+    deleteItm=(id)=>{
+        const {products} = this.state;
+        const itm = products.filter((itm)=>
+            itm.id!==id
+        );
+
+        this.setState({
+            products:itm
         })
     }
     render() {
@@ -77,7 +100,10 @@ class Cart extends React.Component {
                     return (<CartItem 
                         product={product} 
                         key={product.id} 
-                        increaseQty={this.increaseQty}/>);
+                        increaseQty={this.increaseQty}
+                        decreaseQty={this.decreaseQty}
+                        deleteItm={this.deleteItm}
+                        />);
                 })};
 
 
