@@ -12,6 +12,8 @@ class CartItem extends React.Component {
       img: ''
     }
 
+    // this.testing();
+
     //alternative bind method
     // this.increaseQuantity=this.increaseQuantity.bind(this);
   }
@@ -20,6 +22,31 @@ class CartItem extends React.Component {
     console.log(this.state);
   }
   */
+
+
+  /*
+
+  //To know is setState() fun is Synchronous inside promise .... now Its Asynchronous but
+  //I am getting a error .... I will see promise again and come to it 
+  testing(){
+    const promise=new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        resolve('done');
+      }, 5000);
+    });
+    promise.then(()=>{
+      this.setState({
+        qty: this.state.qty + 100
+      });
+      // this.setState({qty:this.state.qty+100});
+      // this.setState({qty:this.state.qty+100});    
+    });
+  }
+
+  */
+
+
+  //Arrow Function
   increaseQuantity = () => {
     // console.log(this.state);
 
@@ -30,11 +57,19 @@ class CartItem extends React.Component {
     //Two ways to do that
 
     // 1st way
-    // this.setState({
-    //   qty: this.state.qty + 1
-    // },()=>{
-    //   console.log("setState() is Asynchronous to avoid it we add callback to setState()")
-    // });
+    /*
+    this.setState({
+      qty: this.state.qty + 1
+    },()=>{
+      console.log("1)setState() is Asynchronous to avoid it we add callback to setState()")
+    });
+
+    this.setState({
+      qty: this.state.qty + 1
+    },()=>{
+      console.log("2)setState() is Asynchronous to avoid it we add callback to setState()")
+    });
+    */
 
 
     //2nd way (when we need previous state then recommended to use this method)
@@ -42,24 +77,21 @@ class CartItem extends React.Component {
       return {
         qty: preState.qty + 1
       }
-    },()=>{
+    }, () => {
       console.log("setState() is Asynchronous to avoid it we add callback to setState()")
     });
 
-    
-
-
   }
 
-  decreaseQuantity = ()=>{
-    if(this.state.qty!=0){
+  decreaseQuantity = () => {
+    if (this.state.qty != 0) {
 
       //used 2nd Form of setState()
       this.setState(
-        (preState)=>{
+        (preState) => {
           return {
-            qty:preState.qty-1
-          } 
+            qty: preState.qty - 1
+          }
         }
       );
     }
