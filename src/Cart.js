@@ -35,44 +35,44 @@ class Cart extends React.Component {
 
 
     }
-    increaseQty=(product)=>{ //used arrow fun to bind this with fun while passing it as props
+    increaseQty = (product) => { //used arrow fun to bind this with fun while passing it as props
         // console.log(this.state)
-        console.log("Hey please inc the qty of "+product);
-        const {products}=this.state;
-        const  index = products.indexOf(product);
+        console.log("Hey please inc the qty of " + product);
+        const { products } = this.state;
+        const index = products.indexOf(product);
 
-        products[index].qty+=1;
+        products[index].qty += 1;
         this.setState({
             // products:products
             products
         })
     }
-    decreaseQty=(product)=>{
-        console.log("Hey please decr the qty of "+product);
-        const {products} = this.state;
+    decreaseQty = (product) => {
+        console.log("Hey please decr the qty of " + product);
+        const { products } = this.state;
         const index = products.indexOf(product);
-        if(products[index].qty<=0){
+        if (products[index].qty <= 0) {
             return;
         }
-        products[index].qty-=1;
+        products[index].qty -= 1;
         this.setState({
-            products:products
+            products: products
         })
     }
-    deleteItm=(id)=>{
-        const {products} = this.state;
-        const itm = products.filter((itm)=>
-            itm.id!==id
+    deleteItm = (id) => {
+        const { products } = this.state;
+        const itm = products.filter((itm) =>
+            itm.id !== id
         );
 
         this.setState({
-            products:itm
+            products: itm
         })
     }
     render() {
         // const arr=[1,2,3,4,5]; // For testing purpose
         const { products } = this.state;
-        
+
         return (
             <div className='cart'>
                 {/* <CartItem/>
@@ -97,14 +97,14 @@ class Cart extends React.Component {
                 {products.map((product) => {
 
                     // product.id is only for react optimization
-                    return (<CartItem 
-                        product={product} 
-                        key={product.id} 
+                    return (<CartItem
+                        product={product}
+                        key={product.id}
                         increaseQty={this.increaseQty}
                         decreaseQty={this.decreaseQty}
                         deleteItm={this.deleteItm}
-                        />);
-                })};
+                    />);
+                })}
 
 
 
