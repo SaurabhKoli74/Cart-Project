@@ -1,11 +1,11 @@
-
-import CartItem from "./CartItem";
+import React from 'react';
+import Cart from "./Cart";
 
 //Functional Component
 function App() {
   return (
     <div className="App">
-      <CartItem />
+      <Cart/>
     </div>
   );
 }
