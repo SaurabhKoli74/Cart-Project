@@ -7,36 +7,49 @@ class Cart extends React.Component {
     constructor() {
         super();
         this.state = {
-            products:[
+            products: [
                 {
                     title: 'phone',
                     price: 999,
                     qty: 1,
-                    img: ''
+                    img: '',
+                    id: 1
 
                 },
                 {
                     title: 'Watch',
                     price: 99,
                     qty: 2,
-                    img: ''
-
+                    img: '',
+                    id: 2
                 },
                 {
                     title: 'Laptop',
                     price: 9999,
                     qty: 5,
-                    img: ''
-                    
-                },
+                    img: '',
+                    id: 3
+                }
             ]
         }
-    
-        
-      }
+
+
+    }
+    increaseQty=(product)=>{
+        // console.log(this.state.products)
+        const {products}=this.state;
+        const  index = products.indexOf(product);
+
+        products[index].qty+=1;
+        this.setState({
+            // products:products
+            products
+        })
+    }
     render() {
         // const arr=[1,2,3,4,5]; // For testing purpose
-        const {products}=this.state;
+        const { products } = this.state;
+        
         return (
             <div className='cart'>
                 {/* <CartItem/>
@@ -53,14 +66,19 @@ class Cart extends React.Component {
 */}
 
 
-{/*             
+                {/*             
             <CartItem title="Watch" qty="1" price="999"/>
             //Use of Props to pass arguement to child component
 */}
-            {products.map((product)=>{
-                
-                return (<CartItem product={product}/>);
-            })};
+
+                {products.map((product) => {
+
+                    // product.id is only for react optimization
+                    return (<CartItem 
+                        product={product} 
+                        key={product.id} 
+                        increaseQty={this.increaseQty}/>);
+                })};
 
 
 
