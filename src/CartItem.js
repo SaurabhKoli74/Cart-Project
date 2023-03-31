@@ -16,7 +16,7 @@ class CartItem extends React.Component {
       <div className="cart-item">
         <div className="left-block">
           {/* inline style */}
-          <img alt="Product Image" style={styles.image} src={img} />
+          <img alt='' style={styles.image} src='' />
         </div>
         <div className="right-block">
           <div style={{ fontSize: 25 }}>{title}</div>
