@@ -11,44 +11,73 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      products: []
+      products: [],
+      loading: true
     }
 
 
   }
-  componentDidMount(){
+  componentDidMount() {
+    // firebase
+    //   .firestore()
+    //   .collection('products')
+    //   .get()
+    //   .then((snapshot) => {
+    //     // console.log(snapshot.docs[0].data() );//to return data as object we .data()...
+    //     //docs[0] contains information in document format and also contains other information of a sigle doc
+    //     //we want only object of key value pairs so add .data()
+
+    //     snapshot.docs.map((doc) => {
+    //       console.log(doc.data())
+    //     });
+
+    //     const products = snapshot.docs.map((doc) => {
+    //       //below without using 'const' or 'let' it gives error
+    //       const data = doc.data();
+    //       data.id = doc.id;
+    //       return data;
+    //     });
+
+    //     this.setState({
+    //       products: products
+    //       // or
+    //       //products
+            // loading:false
+    //     });
+
+
+
+    //   });
+
+    
+    // By above method in the situation like when change in database collection occures then it wont affect
+    //our app so to do that we will add listener callback function
+
     firebase
-            .firestore()
-            .collection('products')
-            .get()
-            .then((snapshot)=>{
-              // console.log(snapshot.docs[0].data() );//to return data as object we .data()...
-              //docs[0] contains information in document format and also contains other information of a sigle doc
-              //we want only object of key value pairs so add .data()
-
-              snapshot.docs.map((doc)=>{
-                console.log(doc.data())
-              });
-
-              const products = snapshot.docs.map((doc)=>{
-                //below without using 'const' or 'let' it gives error
-                const data = doc.data();
-                data.id=doc.id;
-                return data;
-              });
-
-              this.setState({
-                products:products
-               // or
-                //products
-              });
+          .firestore()
+          .collection('products')
+          .onSnapshot((snapshot)=>{
+            /*snapshot.docs.map((doc) => {
+                     console.log(doc.data())
+                  });*/
+          
+                  const products = snapshot.docs.map((doc) => {
+                    //below without using 'const' or 'let' it gives error
+                    const data = doc.data();
+                    data.id = doc.id;
+                    return data;
+                  });
+          
+                  this.setState({
+                    products: products,
+                    // or
+                    //products
+                    loading:false
+                  });
+          });
 
 
 
-            });
-
-            
-            
   }
   increaseQty = (product) => { //used arrow fun to bind this with fun while passing it as props
     // console.log(this.state)
@@ -94,18 +123,18 @@ class App extends React.Component {
     return count;
   }
 
-  getTotal =()=>{
-    const {products} = this.state;
-    let total=0;
-    products.map((itm)=>{
-      total=total+itm.qty*itm.price;
+  getTotal = () => {
+    const { products } = this.state;
+    let total = 0;
+    products.map((itm) => {
+      total = total + itm.qty * itm.price;
     });
 
     return total;
   }
 
   render() {
-    const { products } = this.state;
+    const { products, loading } = this.state;
     return (
       <div className="App">
         <Navbar count={this.getCount()} />
@@ -115,9 +144,11 @@ class App extends React.Component {
           increaseQty={this.increaseQty}
           decreaseQty={this.decreaseQty}
 
-        />
 
-        <div style={{fontSize:20,padding:0}}>
+        />
+        {loading && <h1>loading products...</h1>}
+
+        <div style={{ fontSize: 20, padding: 0 }}>
           Total: {this.getTotal()}
         </div>
       </div>
