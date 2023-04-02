@@ -2,6 +2,20 @@ import React from 'react'; //To write the React Component
 import ReactDOM from 'react-dom/client';//To Render Object returned by ReactDOM in index.html 
 import './index.css';
 import App from './App';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import { initializeApp } from "firebase/app";
+const firebaseConfig = {
+  apiKey: "AIzaSyA_iIrZw-4fud1__60fOOT5tHFjVfLeBfA",
+  authDomain: "cart-a3b5f.firebaseapp.com",
+  projectId: "cart-a3b5f",
+  storageBucket: "cart-a3b5f.appspot.com",
+  messagingSenderId: "166417688962",
+  appId: "1:166417688962:web:a94e9a0ed0b07a3366479b"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 
 //to render App component in "index.html"'s element whose id is "root"

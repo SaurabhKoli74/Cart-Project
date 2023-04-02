@@ -9,7 +9,7 @@ class App extends React.Component {
     this.state = {
       products: [
         {
-          title: 'phone',
+          title: 'Mobile Phone',
           price: 999,
           qty: 1,
           img: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGhvbmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
@@ -45,7 +45,7 @@ class App extends React.Component {
     this.setState({
       // products:products
       products
-    })
+    });
   }
   decreaseQty = (product) => {
     console.log("Hey please decr the qty of " + product);

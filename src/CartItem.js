@@ -21,10 +21,10 @@ const CartItem = (props) => {
         <div style={{ color: '#777' }}>Qty.{qty}</div>
         <div className="cart-item-actions">
           {/* Buttons */}
-          <img onClick={() => { decreaseQty(product) }} alt="decrease" className='action-icons' src="https://cdn-icons-png.flaticon.com/512/992/992514.png" />
+          <img onClick={() => { decreaseQty(product) }} alt="decrease" className='action-icons' src="https://cdn-icons-png.flaticon.com/512/3031/3031143.png" />
           {/* <img onClick={ this.increaseQuantity.bind(this) } alt="increase" className='action-icons' src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png"/> */}
-          <img onClick={() => { increaseQty(product) }} alt="increase" className='action-icons' src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png" />
-          <img onClick={() => deleteItm(product.id)} alt="delete" className='action-icons' src="https://cdn-icons-png.flaticon.com/512/1215/1215092.png" />
+          <img onClick={() => { increaseQty(product) }} alt="increase" className='action-icons' src="https://cdn-icons-png.flaticon.com/512/992/992651.png" />
+          <img onClick={() => deleteItm(product.id)} alt="delete" className='action-icons' src="https://cdn-icons-png.flaticon.com/512/2984/2984959.png" />
 
         </div>
       </div>
