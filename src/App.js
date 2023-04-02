@@ -55,8 +55,10 @@ class App extends React.Component {
 
     this.db
       .collection('products')
-      .where('price','>=',100)
+      // .where('price','>=',100)
+      // .orderBy('price')
       // .where('title','==','Camera')  
+      .orderBy('price','desc')
       .onSnapshot((snapshot) => { //Callback listener function
         /*snapshot.docs.map((doc) => {
                  console.log(doc.data())
