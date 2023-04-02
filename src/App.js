@@ -92,15 +92,15 @@ class App extends React.Component {
     const docRef = this.db.collection('products').doc(products[index].id);
 
     docRef
-        .update({
-          qty:products[index].qty+1
-        })
-        .then(()=>{
-          console.log("Updated Successfully");
-        })
-        .catch((error)=>{
-          console.log("Error", error);
-        });
+      .update({
+        qty: products[index].qty + 1
+      })
+      .then(() => {
+        console.log("Updated Successfully");
+      })
+      .catch((error) => {
+        console.log("Error", error);
+      });
   }
   decreaseQty = (product) => {
     console.log("Hey please decr the qty of " + product);
@@ -109,10 +109,22 @@ class App extends React.Component {
     if (products[index].qty <= 0) {
       return;
     }
-    products[index].qty -= 1;
-    this.setState({
-      products: products
+    // products[index].qty -= 1;
+    // this.setState({
+    //   products: products
+    // })
+
+    const docRef = this.db.collection('products').doc(products[index].id);
+    docRef.update({
+      qty: products[index].qty - 1
     })
+    .then(() => {
+      console.log("Updated Successfully");
+    })
+    .catch((error) => {
+        console.log("Error", error);
+     });
+
   }
   deleteItm = (id) => {
     const { products } = this.state;
