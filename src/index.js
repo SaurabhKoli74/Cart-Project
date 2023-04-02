@@ -4,7 +4,13 @@ import './index.css';
 import App from './App';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
-import { initializeApp } from "firebase/app";
+// Import the functions you need from the SDKs you need
+
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyA_iIrZw-4fud1__60fOOT5tHFjVfLeBfA",
   authDomain: "cart-a3b5f.firebaseapp.com",
@@ -15,7 +21,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 
 
 //to render App component in "index.html"'s element whose id is "root"

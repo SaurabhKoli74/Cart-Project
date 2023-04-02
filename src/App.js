@@ -2,38 +2,53 @@ import React from 'react';
 import Cart from "./Cart";
 import Navbar from './Navbar';
 //Functional Component
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+
+
 class App extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      products: [
-        {
-          title: 'Mobile Phone',
-          price: 999,
-          qty: 1,
-          img: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGhvbmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-          id: 1
-
-        },
-        {
-          title: 'Watch',
-          price: 99,
-          qty: 2,
-          img: 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2F0Y2h8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-          id: 2
-        },
-        {
-          title: 'Laptop',
-          price: 9999,
-          qty: 5,
-          img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-          id: 3
-        }
-      ]
+      products: []
     }
 
 
+  }
+  componentDidMount(){
+    firebase
+            .firestore()
+            .collection('products')
+            .get()
+            .then((snapshot)=>{
+              // console.log(snapshot.docs[0].data() );//to return data as object we .data()...
+              //docs[0] contains information in document format and also contains other information of a sigle doc
+              //we want only object of key value pairs so add .data()
+
+              snapshot.docs.map((doc)=>{
+                console.log(doc.data())
+              });
+
+              const products = snapshot.docs.map((doc)=>{
+                //below without using 'const' or 'let' it gives error
+                const data = doc.data();
+                data.id=doc.id;
+                return data;
+              });
+
+              this.setState({
+                products:products
+               // or
+                //products
+              });
+
+
+
+            });
+
+            
+            
   }
   increaseQty = (product) => { //used arrow fun to bind this with fun while passing it as props
     // console.log(this.state)
