@@ -15,7 +15,7 @@ class App extends React.Component {
       loading: true
     }
 
-
+    this.db = firebase.firestore();
   }
   componentDidMount() {
     // firebase
@@ -42,39 +42,38 @@ class App extends React.Component {
     //       products: products
     //       // or
     //       //products
-            // loading:false
+    // loading:false
     //     });
 
 
 
     //   });
 
-    
+
     // By above method in the situation like when change in database collection occures then it wont affect
     //our app so to do that we will add listener callback function
 
-    firebase
-          .firestore()
-          .collection('products')
-          .onSnapshot((snapshot)=>{
-            /*snapshot.docs.map((doc) => {
-                     console.log(doc.data())
-                  });*/
-          
-                  const products = snapshot.docs.map((doc) => {
-                    //below without using 'const' or 'let' it gives error
-                    const data = doc.data();
-                    data.id = doc.id;
-                    return data;
-                  });
-          
-                  this.setState({
-                    products: products,
-                    // or
-                    //products
-                    loading:false
-                  });
-          });
+    this.db
+      .collection('products')
+      .onSnapshot((snapshot) => { //Callback listener function
+        /*snapshot.docs.map((doc) => {
+                 console.log(doc.data())
+              });*/
+
+        const products = snapshot.docs.map((doc) => {
+          //below without using 'const' or 'let' it gives error
+          const data = doc.data();
+          data.id = doc.id;
+          return data;
+        });
+
+        this.setState({
+          products: products,
+          // or
+          //products
+          loading: false
+        });
+      });
 
 
 
@@ -132,12 +131,29 @@ class App extends React.Component {
 
     return total;
   }
+  addNewProduct = () => {
+    this.db
+      .collection('products')
+      .add({
+        img: '',
+        title: 'Washing Machine',
+        qty: 1,
+        price: 5000
+      })
+      .then((docRef) => {
+        console.log('Product has been added !!', docRef);
+      })
+      .catch((error) => {
+        console.log('Error', error);
+      });
 
+  }
   render() {
     const { products, loading } = this.state;
     return (
       <div className="App">
         <Navbar count={this.getCount()} />
+        <button   style={{padding:10, margin:10, cursor:'pointer'}} onClick={this.addNewProduct}>Add Product</button>
         <Cart
           products={products}
           deleteItm={this.deleteItm}
