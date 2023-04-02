@@ -128,13 +128,26 @@ class App extends React.Component {
   }
   deleteItm = (id) => {
     const { products } = this.state;
-    const itm = products.filter((itm) =>
-      itm.id !== id
-    );
+    // const itm = products.filter((itm) =>
+    //   itm.id !== id
+    // );
 
-    this.setState({
-      products: itm
+    // this.setState({
+    //   products: itm
+    // })
+
+    const docRef = this.db.collection('products').doc(id);
+
+    docRef
+    .delete()
+    .then(() => {
+      console.log("Deleted Successfully Successfully");
     })
+    .catch((error) => {
+        console.log("Error", error);
+     });
+    
+
   }
 
   getCount = () => {
